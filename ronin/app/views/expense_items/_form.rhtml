@@ -1,0 +1,15 @@
+<%= error_messages_for 'expense_item' %>
+
+<!--[form:expense_item]-->
+Expense Date: <%= date_select 'expense_item', 'expense_date', :order => [:day, :month, :year]   %><br />
+Supplier: <%= text_field 'expense_item', 'supplier'  %><br />
+Type: <%= select(
+                "expense_item",
+                'expense_type_id',
+                ExpenseType.find(:all).sort{|a,b| a.name <=> b.name }.collect {|b| [ b.name, b.id ] } 
+        ) %>
+  <br />
+Invoice Attached: <%= check_box 'expense_item', 'invoice_att'  %><br />
+Net: <%= text_field 'expense_item', 'net'  %><br />
+VAT: <%= text_field 'expense_item', 'vat'  %><br />
+<!--[eoform:expense_item]-->

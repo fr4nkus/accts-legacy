@@ -1,0 +1,26 @@
+<h1>Listing accounts</h1>
+
+<table>
+  <tr>
+  <% for column in Accounts.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for accounts in @accounts %>
+  <tr>
+  <% for column in Accounts.content_columns %>
+    <td><%=h accounts.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => accounts %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => accounts %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => accounts }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New accounts', :action => 'new' %>

@@ -1,0 +1,26 @@
+<h1>Listing invoice_items</h1>
+
+<table>
+  <tr>
+  <% for column in InvoiceItem.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for invoice_item in @invoice_items %>
+  <tr>
+  <% for column in InvoiceItem.content_columns %>
+    <td><%=h invoice_item.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => invoice_item %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => invoice_item %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => invoice_item }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New invoice_item', :action => 'new' %>

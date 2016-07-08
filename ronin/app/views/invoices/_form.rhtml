@@ -1,0 +1,13 @@
+<%= error_messages_for 'invoice' %>
+
+<!--[form:invoice]-->
+<p><label for="invoice_paid">Paid</label><br/>
+</p>
+
+<p><label for="invoice_invoiced">Invoiced</label><br/>
+<%= calendar_date_select_tag 'invoice[invoiced]' , DateTime.now %></p>
+
+<label for="invoice_contract_id">Contract:</label><br/>
+<%= select("invoice", "contract_id", Contract.find(:all).collect {|c| [ "#{c.agent.name} #{c.starts} - #{c.ends}", c.agent.id ] } ) %></p>
+
+<!--[eoform:invoice]-->

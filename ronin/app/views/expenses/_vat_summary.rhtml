@@ -1,0 +1,9 @@
+<table class="noPrint" id="vat_types">
+  <tr>
+    <td>VAT</td>
+    <% for type in types %><td><%= type.name %></td><% end %>
+  </tr>
+  <tr>
+    <%= render :partial => 'vat_breakdown', :locals => { :vat => vat, :types => types, :summary => summary } %>
+  </tr>
+</table>

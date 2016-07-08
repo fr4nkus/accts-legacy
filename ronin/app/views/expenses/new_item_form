@@ -1,0 +1,22 @@
+<%= error_messages_for 'expense_item' %>
+
+<!--[form:expense_item]-->
+<% form_remote_tag 
+    :update => "subject_list",
+    :position => :bottom,
+    :html => { :url => { :action => 'create_expense_item'} }
+do -%>
+<td><%= hidden_field_tag 'expense_item[expense_id]', @expense.id %><%= calendar_date_select_tag 'expense_item[expense_date]' %></td>
+  <td><%= text_field 'expense_item', 'supplier'  %></td>
+  <td><%= select(
+                "expense_item",
+                'expense_type_id',
+                @types.collect {|b| [ b.name, b.id ] }
+        ) %>
+  </td>
+  <td><%= check_box 'expense_item', 'invoice_att'%></td>
+  <td><%= text_field 'expense_item', 'net'  , :id=>'net_field', :size => '10'  %></td>
+  <td><%= text_field 'expense_item', 'vat', :id=>'vat_field', :size => '10'   %></td>
+  <td><%= submit_tag 'save'  %></td>
+<% end -%>
+<!--[eoform:expense_item]-->

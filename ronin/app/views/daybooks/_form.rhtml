@@ -1,0 +1,16 @@
+<%= error_messages_for 'daybooks' %>
+
+<!--[form:daybooks]-->
+<p><label for="daybooks_action_date">Action date</label><br/>
+<%= date_select 'daybooks', 'action_date'  %></p>
+
+<p><label for="daybooks_debit">Debit</label><br/>
+<select id="daybooks_debit" name="daybooks[debit]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+
+<p><label for="daybooks_desc">Desc</label><br/>
+<%= text_field 'daybooks', 'desc'  %></p>
+
+<p><label for="daybooks_amount">Amount</label><br/>
+<%= text_field 'daybooks', 'amount'  %></p>
+<!--[eoform:daybooks]-->
+

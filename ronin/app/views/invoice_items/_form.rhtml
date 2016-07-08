@@ -1,0 +1,16 @@
+<%= error_messages_for 'invoice_item' %>
+
+<!--[form:invoice_item]-->
+<p><label for="invoice_item_units">Units</label><br/>
+<%= text_field 'invoice_item', 'units'  %></p>
+
+<p><label for="invoice_item_vatable">Vatable</label><br/>
+<select id="invoice_item_vatable" name="invoice_item[vatable]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+
+<p><label for="invoice_item_description">Description</label><br/>
+<%= text_field 'invoice_item', 'description'  %></p>
+
+<p><label for="invoice_item_date">Date</label><br/>
+<%= date_select 'invoice_item', 'date'  %></p>
+<!--[eoform:invoice_item]-->
+

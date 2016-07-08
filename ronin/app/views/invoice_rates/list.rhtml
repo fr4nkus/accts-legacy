@@ -1,0 +1,26 @@
+<h1>Listing invoice_rates</h1>
+
+<table>
+  <tr>
+  <% for column in InvoiceRate.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for invoice_rate in @invoice_rates %>
+  <tr>
+  <% for column in InvoiceRate.content_columns %>
+    <td><%=h invoice_rate.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => invoice_rate %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => invoice_rate %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => invoice_rate }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New invoice_rate', :action => 'new' %>

@@ -1,0 +1,14 @@
+<%= error_messages_for 'expense' %>
+
+<!--[form:expense]-->
+
+<p><label for="expense_employee_id">Employee:</label>
+<%= select("expense", "employee_id", Employee.find(:all).collect {|p| [ "#{p.first_name} #{p.last_name}", p.id ] } ) %></p>
+
+<p><label for="expense_period_end">Period End:</label>
+<%= calendar_date_select_tag 'expense[period_end]' %></p>
+
+<p> <label for="expense_employee_id">Approved:</label>
+<%= select("expense", "approved_employee_id", Employee.find(:all).collect {|p| [ "#{p.first_name} #{p.last_name}", p.id ] } ) %></p>
+
+<!--[eoform:expense]-->

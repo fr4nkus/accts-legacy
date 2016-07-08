@@ -1,0 +1,68 @@
+<h1>Petty Cash Expense Claim</h1>
+<p><u><b>Period Ended:</b>&nbsp;<%= @expense.period_end.strftime( "%d/%m/%Y" ) %></u></p>
+<p><u><b>Employee:</b>&nbsp;<%= @expense.employee.first_name %> <%= @expense.employee.last_name %></u></p>
+
+<table>
+<tr>
+  <td><b>Date</b></td>
+  <td><b>Supplier</b></td>
+  <td><b>Expense<br />Nature</b></td>
+  <td><b>Invoice<br />Attached</b></td>
+  <td><b>Net</b></td>
+  <td><b>VAT</b></td>
+  <td colspan="2"><b>Gross</b></td>
+</tr>
+<% @net= 0 %>
+<% @vat = 0 %>
+<% @gross = 0 %>
+<% summary = {} %>
+<% for e in @expense.expense_items.sort{ |a,b| a.expense_date <=> b.expense_date } %>
+<tr>
+  <td><%= e.expense_date.strftime('%d/%m/%y') %></td>
+  <td><%= e.supplier %></td>
+  <td><%= e.expense_type.name %></td>
+  <td><%= e.invoice_att == 1 ? image_tag( 'tick.jpg' ) : '&nbsp;' %>
+  </td>
+  <td><%= number_to_currency(e.net.to_f, :unit => '&pound;') %><% @net += e.net.to_f %></td>
+  <td><%= number_to_currency(e.vat.to_f, :unit => '&pound;') %><% @vat += e.vat.to_f %></td>
+  <td><%= number_to_currency(e.vat.to_f + e.net.to_f, :unit => '&pound;') %><% @gross += (e.vat.to_f + e.net.to_f) %></td>
+  <td class="noPrint">
+  <% summary[ e.expense_type.name ] = summary.has_key?( e.expense_type.name ) ? ( summary[ e.expense_type.name ] + e.net ) : e.net %>
+  <%= link_to image_tag( 'edit.jpg', :border => 0 ), :controller => 'expense_items', :action => 'edit', :id => e.id %>
+  </td>
+
+</tr>
+<% end %>
+<tr class="noPrint">
+  <% @types = ExpenseType.find(:all, :order => 'name ASC' ) %>
+  <%= render :partial => 'item_form' %>
+</tr>
+<tr class="noPrint">
+  <%= render :partial => 'vat_calculator' %>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>
+  <td><%= number_to_currency( @net, :unit => '&pound;' ) %></td>
+  <td><%= number_to_currency( @vat, :unit => '&pound;' ) %></td>
+  <td><%= number_to_currency( @gross, :unit => '&pound;' ) %></td>
+</tr>
+<tr>
+    <td colspan="4" class="printOnly"><b>Claimant Signature:</b><br/>&nbsp;<br/></td>
+</tr>
+<tr>
+   <td colspan="8"><b>Approved By:</b>&nbsp;<%= @expense.approved.first_name %> <%= @expense.approved.last_name %></td>
+</tr>
+<tr>
+<td colspan="8" class="printOnly"><br/>&nbsp;<br/><b>Signature:</b></td>
+</tr>
+</table>
+
+<div id="vat_summary">
+  <%= render :partial => 'vat_summary', :locals => { :summary => summary, :vat => @vat, :types => @types } %>
+</div>
+
+<div class="noPrint">
+  <%= link_to 'Edit', :action => 'edit', :id => @expense %> |
+  <%= link_to 'Back', :action => 'list' %> | 
+  <a href="#" onclick="window.print()">Print</a>
+</div>

@@ -1,0 +1,26 @@
+<h1>Listing remittances</h1>
+
+<table>
+  <tr>
+  <% for column in Remittance.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for remittance in @remittances %>
+  <tr>
+  <% for column in Remittance.content_columns %>
+    <td><%=h remittance.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => remittance %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => remittance %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => remittance }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New remittance', :action => 'new' %>

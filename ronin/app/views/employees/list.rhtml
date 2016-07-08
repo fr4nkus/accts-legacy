@@ -1,0 +1,26 @@
+<h1>Listing employees</h1>
+
+<table>
+  <tr>
+  <% for column in Employees.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for employees in @employees %>
+  <tr>
+  <% for column in Employees.content_columns %>
+    <td><%=h employees.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => employees %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => employees %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => employees }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New employees', :action => 'new' %>

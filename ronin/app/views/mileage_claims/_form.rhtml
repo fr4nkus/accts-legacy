@@ -1,0 +1,39 @@
+<%= error_messages_for 'mileage_claim' %>
+
+<!--[form:mileage]-->
+<p><label for="mileage_claim_period_end">Period End:</label>
+<%= calendar_date_select_tag 'claim[period_end]' %></p>
+<!-- , Time.now.last_month.end_of_month -->
+
+<p><label for="mileage_claim_employee_id">Employee:</label>
+<%= select(
+                "claim",
+                'employee_id',
+                Employee.find(:all){|a,b| a.last_name <=> b.last_name }.collect {|b| [ b.first_name+' '+b.last_name, b.id ] },
+                { 
+                  :include_blank => true,
+                  :selected => @claim.employee.nil? ? 0 : @claim.employee.id
+                }
+        ) %>
+</p>
+
+<p><label for="mileage_claim_rate">Rate:</label>
+<%= text_field 'claim', 'rate'  %></p>
+
+<p><label for="mileage_claim_approaved_employee_id">Approved:</label>
+<%= select(
+                "claim",
+                'approved_employee_id',
+                Employee.find(:all){|a,b| a.last_name <=> b.last_name }.collect {|b| [ b.first_name+' '+b.last_name, b.id ] },
+                { 
+                  :include_blank => true, 
+                  :selected => @claim.approved.nil? ? 0 : @claim.approved.id
+                }
+        ) %>
+</p>
+
+<p><label for="mileage_claim_cheque_number">Cheque Number:</label>
+<%= text_field 'claim', 'cheque_number' %></p>
+
+<!--[eoform:mileage]-->
+

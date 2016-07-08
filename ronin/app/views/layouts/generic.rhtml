@@ -1,0 +1,69 @@
+<html>
+<head>
+  <title>Ronin::<%= controller.controller_name.capitalize %>::<%= controller.action_name.capitalize %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'menu' %>
+  <%= stylesheet_link_tag 'print', :media => "print" %>
+</head>
+<%= javascript_include_tag :defaults %>
+<%= calendar_date_select_includes "silver" %>
+<body>
+<table width="100%" class="layout">
+  <tr>
+    <td colspan="2" class="layout">
+    <div class="companyImage"><%= image_tag( 'ronin-sml.gif' )%></div>
+    </td>
+  </tr>
+  <tr>
+    <td width="160" class="navPanel" valign="top">
+    <ul class="navItem">
+      <li><a href="#">Contract</a>
+        <ul>
+          <li><%= link_to 'Contracts', :controller => 'contracts', :action => 'list' %></li>
+          <li><%= link_to 'Agents', :controller => 'agents', :action => 'list' %></li>
+          <li><%= link_to 'Clients', :controller => 'clients', :action => 'list' %></li>
+        </ul>
+      </li>
+      <li><a href="#">Invoices</a>
+        <ul>
+          <li><%= link_to 'Invoices', :controller => 'invoices', :action => 'list' %></li>
+          <li><%= link_to 'Invoices Rates', :controller => 'invoice_rates', :action => 'list' %></li>
+          <li><%= link_to 'Invoice Types', :controller => 'invoice_types', :action => 'list' %></li>
+          <li><%= link_to 'Remittances', :controller => 'remittances', :action => 'list' %></li>
+        </ul>
+      </li>
+      <li><a href="#">Expenses</a>
+        <ul>
+          <li><%= link_to 'Expenses', :controller => 'expenses', :action => 'list' %></li>
+          <li><%= link_to 'Expense Types', :controller => 'expense_types', :action => 'list' %></li>
+          <li><%= link_to 'Mileage', :controller => 'mileage_claims', :action => 'list' %></li>
+        </ul>
+      </li>
+      <li><a href="#">Reports</a>
+        <ul>
+          <li><%= link_to 'Mileage', :controller => 'reports', :action => 'mileage_claims' %></li>
+          <li><%= link_to 'Expenses', :controller => 'reports', :action => 'expenses' %></li>
+          <li><%= link_to 'Invoices', :controller => 'reports', :action => 'invoices' %></li>
+        </ul>
+      </li>
+      <li><a href="#">Company</a>
+        <ul>
+          <li><%= link_to 'Employees', :controller => 'employees', :action => 'list' %></li>
+          <li><%= link_to 'Accounts', :controller => 'accounts', :action => 'list' %></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
+    </td>
+    <td class="layout">
+    <%= yield  %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="noPrint">
+    <p style="color: green"><%= flash[:notice] %></p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

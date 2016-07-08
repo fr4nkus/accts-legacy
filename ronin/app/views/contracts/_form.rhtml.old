@@ -1,0 +1,26 @@
+<!--[form:contract]-->
+<% form_tag :action => 'update', :id => @contract do %>
+<td>
+  <%= select_tag('contract[agent_id]',
+          options_from_collection_for_select(
+             Agent.find(:all, :order => 'name'),
+             'id', 'name'
+          )
+      )
+  %>
+</td>
+<td>
+  <%= select_tag('contract[client_id]',
+          options_from_collection_for_select(
+             Client.find(:all, :order => 'name'),
+             'id', 'name'
+          )
+      )
+  %>
+</td>
+<td><%= calendar_date_select_tag 'contract[starts]' %></td>
+<td><%= calendar_date_select_tag 'contract[ends]' %></td>
+<td><%= link_to 'Cancel', :action => 'show', :id => @contract %></td>
+<td><%= submit_tag 'Save' %></td>
+<% end %>
+<!--[eoform:contract]-->

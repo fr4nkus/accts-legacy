@@ -1,0 +1,4 @@
+  <td><%= number_to_currency( vat, :unit => '&pound;' )%></td>
+<% for type in types %>
+  <td><%= summary.has_key?( type.name ) ?  number_to_currency( summary[ type.name ], :unit => '&pound;' ) : '&nbsp;' %></td>
+<% end %>

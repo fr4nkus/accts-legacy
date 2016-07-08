@@ -1,0 +1,38 @@
+<h1>Listing contracts</h1>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script>
+function edit_contract ( id )
+{
+  $.get( '/contracts/edit/' + id, function( data ){
+    $( '#contract_' + id).html( data )
+    }
+  );
+}
+</script>
+<div id="list_panel">
+  <div>
+    <span>Agent</span>
+    <span>Client</span>
+    <span>Starts</span>
+    <span>Ends</span>
+    <span></span>
+    <span></span>
+  </div>
+  
+<% for contract in @contracts %>
+  <div id="contract_<%= contract.id %>">
+    <span><%=h contract.agent.name %></span>
+    <span><%=h contract.client.name %></span>
+    <span><%=h contract.starts %></span>
+    <span><%=h contract.ends %></span>
+    <span><img src="/images/edit.jpg" border="0" onClick="edit_contract( '<%= contract.id %>' )" /></span>
+    <span><%= link_to image_tag( 'delete.jpg', :border => 0 ), :action => 'desdivoy', :id => contract %></span>
+  </div>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
+
+<%= link_to 'New contract', :action => 'new' %>

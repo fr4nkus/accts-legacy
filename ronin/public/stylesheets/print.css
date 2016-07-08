@@ -1,0 +1,80 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  display: none;
+}
+
+table {
+	border: 1px;
+	border-color: black;
+	border-style: solid;
+	border-collapse: collapse
+}
+
+table.layout {
+	border: 0px;
+	border-color: black;
+	border-style: solid;
+}
+
+td.layout {
+   padding: 0px;
+   margin: 1px;
+   border: 0px;
+	border-color: black;
+	border-style: solid;
+	border-spacing:0px;
+}
+
+td {
+   padding: 2px;
+   margin: 0px;
+   border: 1px;
+   border-color: black;
+   border-style: solid;
+   border-spacing:0px;
+}
+
+div.uploadStatus {
+  display: none;
+}
+
+div.progressBar {
+  display: none;
+}
+
+div.progressBar div.border {
+  display: none;
+}
+
+div.progressBar div.background {
+  display: none;
+}
+
+TD.navPanel {
+	display: none;
+}
+
+TD.editLink {
+	display: none;
+}
+
+.noPrint {
+	display: none;
+}
+
+TD.printOnly {
+	display: table-cell;
+}
+
+div.companyImage {
+	position: absolute;
+	top: 0px;
+	right: 200px;
+}

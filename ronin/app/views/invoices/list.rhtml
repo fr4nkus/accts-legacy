@@ -1,0 +1,31 @@
+<h1>Listing invoices</h1>
+
+<table>
+  <tr>
+    <th>Invoice #</th>
+    <th>Client</th>
+    <th>Agent</th>
+    <th>Invoiced</th>
+    <th>Paid</th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+<% for invoice in @invoices %>
+  <tr>
+    <td><%= link_to invoice.reference, :action => 'show', :id => invoice %></td>
+    <td><%= invoice.contract.client.name %></td>
+    <td><%= invoice.contract.agent.name %></td>
+    <td><%= invoice.created_at %></td>
+    <td><%= invoice.paid %></td>
+    <td><%= link_to image_tag( 'edit.jpg', :border => 0 ), :action => 'edit', :id => invoice %></td>
+    <td><%= link_to image_tag( 'delete.jpg', :border => 0 ), { :action => 'destroy', :id => invoice }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @invoices %>
+
+<br />
+
+<%= link_to 'New invoice', :action => 'new' %>

@@ -1,0 +1,9 @@
+<h1>Editing expense_items</h1>
+
+<% form_tag :action => 'update', :id => @expense_item do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @expense_item %> |
+<%= link_to 'Back', :action => 'list' %>

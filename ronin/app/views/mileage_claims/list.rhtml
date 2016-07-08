@@ -1,0 +1,20 @@
+<h1>Listing Mileage Claims</h1>
+
+<table>
+  <tr>
+    <th>Period End</th>
+    <th>Employee</th>
+    <th>Amount</th>
+  </tr>
+<% for claim in @claims %>
+  <tr>
+    <td><%= claim.period_end.strftime( "%d/%m/%y" ) %></td>
+    <td><%= link_to "#{claim.employee.first_name} #{claim.employee.last_name}", :action => 'show', :id => claim %></td>
+    <td><%= number_to_currency( claim.amount,  :unit => '&pound;' ) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New claim', :action => 'new' %>

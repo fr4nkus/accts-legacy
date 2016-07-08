@@ -1,0 +1,16 @@
+<!--[form:invoice_item]-->
+<%= javascript_include_tag "vatCalculator" %>
+<td colspan="6" align="right">
+   VAT calculator
+</td>
+<td colspan="2">
+   <input
+    type="text"
+    id="gross_field"
+    value="0"
+    name="vat_calculator"
+    onKeyUp="calculate_vat('gross_field','net_field','vat_field')"
+    size="10"
+  />
+</td>
+<!--[eoform:invoice_item]-->

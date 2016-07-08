@@ -1,0 +1,25 @@
+<h1>Listing expenses</h1>
+
+<table>
+  <tr>
+    <th>Period End</th>
+    <th>Employee</th>
+    <th>Gross</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% for expense in @expenses %>
+  <tr>
+    <td><%= expense.period_end.strftime('%d/%m/%Y') %></td>
+    <td><%= link_to expense.employee.full_name, :action => 'show', :id => expense %></td>
+    <td><%= expense.gross %></td>
+    <td><%= link_to image_tag( 'edit.jpg', :border => 0 ), :action => 'edit', :id => expense %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @expenses %>
+
+<br />
+
+<%= link_to 'New expense', :action => 'new' %>

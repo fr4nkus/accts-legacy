@@ -1,0 +1,13 @@
+<%= error_messages_for 'expense_type' %>
+
+<!--[form:expense_type]-->
+<p><label for="expense_type_name">Name</label><br/>
+<%= text_field 'expense_type', 'name'  %></p>
+
+<p><label for="expense_type_description">Description</label><br/>
+<%= text_area 'expense_type', 'description'  %></p>
+
+<p><label for="expense_type_vatable">Vatable</label><br/>
+<select id="expense_type_vatable" name="expense_type[vatable]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+<!--[eoform:expense_type]-->
+

@@ -1,0 +1,54 @@
+<h1>Mileage Claim</h1>
+<p><u><b>Period Ended:</b>&nbsp;<%= @claim.period_end.strftime( "%d/%m/%Y" ) %></u></p>
+<p><u><b>Employee:</b>&nbsp;<%= @claim.employee.first_name %> <%= @claim.employee.last_name %></u></p>
+
+<table>
+  <tr>
+    <td><b>Date</b></td>
+    <td><b>Journey Details</b></td>
+    <td><b>Number of Miles</b></td>
+    <td class="noPrint"><b>&nbsp;</b></td>
+  </tr>
+  <% @total_miles = 0 %>
+  <% for m in @claim.mileages %>
+  <tr>
+    <td><%= m.travel_date.strftime( "%d/%m/%Y" ) %></td>
+    <td><%= m.detail %></td>
+    <td><%= m.miles %><% @total_miles += m.miles %></td>
+    <td class="noPrint">
+    <%= link_to image_tag( 'edit.jpg', :border => 0 ), :controller => 'mileages', :action => 'edit', :id => m.id %><%= link_to image_tag( 'delete.jpg', :border => 0 ), :controller => 'mileages', :action => 'destroy', :id => m.id %>
+    </td>
+  </tr>
+  <% end %>
+  <tr class="noPrint">
+  <% form_tag( :action=>'create_mileage_entry', :mileage_claim_id => @claim ) do %>
+    <td><%= hidden_field_tag 'mileage[mileage_claim_id]', @claim.id %><%= calendar_date_select_tag 'mileage[travel_date]', @claim.period_end %></td>
+    <td><%= text_field 'mileage', 'detail'  %></td>
+    <td><%= text_field 'mileage', 'miles' , :size =>5 %></td>
+    <td><%= submit_tag 'save'  %></td>
+  <% end %>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+    <td colspan="2"><%= pluralize( @total_miles.to_i, 'mile' ) %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><b>Total Number of <%= pluralize( @total_miles.to_i, 'mile' ) %> at:</b>&nbsp;<%= number_to_currency( @claim.rate, :unit => '&pound;' ) %></u></td>
+    <td colspan="2"><u><%= number_to_currency( @total_miles.to_i * @claim.rate, :unit => '&pound;' ) %></u></td>
+  </tr>
+  <tr>
+    <td colspan="4" class="printOnly"><b>Claimant Signature:</b><br/>&nbsp;<br/></td>
+  </tr>
+  <tr>
+    <td colspan="4"><b>Approved By:</b>&nbsp;<%= @claim.approved.first_name %> <%= @claim.approved.last_name %></td>
+  </tr>
+  <tr>
+    <td colspan="4" class="printOnly"><br/>&nbsp;<br/><b>Signature:</b></td>
+  </tr>
+</table>
+
+<div class="noPrint">
+<%= link_to 'Edit', :action => 'edit', :id => @claim %> |
+<%= link_to 'Back', :action => 'list' %> | 
+<a href="#" onclick="window.print()">Print</a>
+</div>

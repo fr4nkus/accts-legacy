@@ -1,0 +1,31 @@
+<h1>Yearly VAT breakdown</h1>
+<% @types = ExpenseType.find(:all, :order => 'name ASC' ) %>
+
+<table>
+  <tr>
+    <td>Date</td>
+    <td>VAT</td>
+    <% for type in @types %><td><%= type.name %></td><% end %>
+  </tr>
+<% for expense in @expenses %>
+
+  <%
+  summary = {}
+  vat = 0
+
+  for e in expense.expense_items.sort{ |a,b| a.expense_date <=> b.expense_date }
+    summary[ e.expense_type.name ] = summary.has_key?( e.expense_type.name ) ? ( summary[ e.expense_type.name ] + e.net ) : e.net
+    vat += e.vat.to_f
+  end
+  %>
+
+  <tr>
+  <td><%= expense.period_end.strftime('%d/%m/%y') %></td>
+  <%= render :partial => 'vat_breakdown', :locals => { :summary => summary, :vat => vat, :types => @types } %>
+  </tr>
+
+<% end %>
+</table>
+<% will_paginate @expenses %>
+
+<br/>

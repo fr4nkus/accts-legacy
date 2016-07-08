@@ -1,0 +1,26 @@
+<h1>Listing expense_items</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Supplier</th>
+    <th>Net</th>
+    <th>Vat</th>
+  </tr>
+  
+<% for expense_item in @expense_items %>
+  <tr>
+    <td><%= expense_item.expense_date.strftime( "%d/%m/%Y" ) %></td>
+    <td><%= expense_item.supplier %></td>
+    <td><%= number_to_currency( expense_item.net.to_f ) %></td>
+    <td><%= number_to_currency( expense_item.vat.to_f ) %></td>
+    <td class="editLink"><%= link_to 'Show', :action => 'show', :id => expense_item %></td>
+    <td class="editLink"><%= link_to 'Edit', :action => 'edit', :id => expense_item %></td>
+    <td class="editLink"><%= link_to 'Destroy', { :action => 'destroy', :id => expense_item }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<% will_paginate @accounts %>
+
+<br />
